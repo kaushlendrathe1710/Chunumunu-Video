@@ -85,11 +85,13 @@ const app = Consumer.create({
 });
 
 app.on("error", (err) => {
-  console.error(err.message);
+  console.error("Error: ", err.message);
 });
 
 app.on("processing_error", (err) => {
-  console.error(err.message);
+  console.error("Processing Error: ", err.message);
 });
 
 app.start();
+
+console.log("Worker is running...");
