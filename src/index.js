@@ -93,3 +93,5 @@ app.on("processing_error", (err) => {
 });
 
 app.start();
+
+console.log("Worker is running...");
