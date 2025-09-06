@@ -7,6 +7,14 @@ import {
   timestamp,
 } from "drizzle-orm/pg-core";
 
+export const videoCategories = pgTable("video_categories", {
+  id: serial("id").primaryKey(),
+  name: text("name").notNull().unique(),
+  description: text("description"),
+  iconUrl: text("icon_url"),
+  createdAt: timestamp("created_at").defaultNow(),
+});
+
 export const videos = pgTable("videos", {
   id: serial("id").primaryKey(),
   title: text("title").notNull(),
@@ -18,7 +26,7 @@ export const videos = pgTable("videos", {
   likes: integer("likes").default(0),
   dislikes: integer("dislikes").default(0),
   userId: integer("user_id").notNull(),
-  category: text("category").default("Entertainment"),
+  categoryId: integer("category_id").references(() => videoCategories.id),
   createdAt: timestamp("created_at").defaultNow(),
   isPublished: boolean("is_published").default(false),
   isShort: boolean("is_short").default(false),
